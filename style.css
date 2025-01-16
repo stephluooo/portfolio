@@ -28,18 +28,3 @@ nav ul {
   justify-content: center;
 }
 
-.about {
-  display: flex;
-  align-items: center; 
-  gap: 2rem; 
-}
-
-.about img {
-  flex-shrink: 0;
-  max-width: 150px;
-  height: auto;
-}
-
-.about div {
-  flex: 1;
-}

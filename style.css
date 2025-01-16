@@ -16,14 +16,30 @@ img {
 }
 
 section {
-  margin-top: 2rem; /* Add space between sections */
+  margin-top: 2rem;
 }
 
 nav ul {
-  list-style: none; /* Remove bullets */
+  list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
-  gap: 1rem; /* Add spacing between links */
-  justify-content: center; /* Center the navigation */
+  gap: 1rem; 
+  justify-content: center;
+}
+
+.about {
+  display: flex;
+  align-items: center; 
+  gap: 2rem; 
+}
+
+.about img {
+  flex-shrink: 0;
+  max-width: 150px;
+  height: auto;
+}
+
+.about div {
+  flex: 1;
 }

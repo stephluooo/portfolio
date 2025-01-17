@@ -70,3 +70,7 @@ form {
   grid-column: 1 / -1;
   gap: 1em;
 }
+
+button{
+  grid-column: 1 / -1;
+}

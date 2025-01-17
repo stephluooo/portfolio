@@ -49,5 +49,9 @@ nav a {
 }
 
 :root {
-  --color-accent: oklch(65% 50% 0)
+  --color-accent: oklch(0.93 0.04 310.41 / 1)
+}
+
+form {
+  font: inherit;
 }

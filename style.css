@@ -60,4 +60,6 @@ nav a:hover{
 
 form {
   font: inherit;
+  display:grid;
+  grid-template-columns: auto 1fr
 }

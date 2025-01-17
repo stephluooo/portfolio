@@ -61,7 +61,9 @@ nav a:hover{
 form {
   font: inherit;
   display:grid;
-  grid-template-columns: auto 1fr
+  grid-template-columns: auto 1fr;
+  gap: 1em;
+  width: 100%;
 }
 
 .section{

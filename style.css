@@ -63,3 +63,10 @@ form {
   display:grid;
   grid-template-columns: auto 1fr
 }
+
+.section{
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1 / -1;
+  gap: 1em;
+}

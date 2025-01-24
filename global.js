@@ -43,7 +43,7 @@ let pages = [
         url = '../' + url;
     } else {
         // home page
-        url = 'https://github.com/stephluooo/portfolio' + url
+        url = 'https://stephluooo.github.io/portfolio/' + url
     }
     
     let a = document.createElement('a');
@@ -61,4 +61,3 @@ let pages = [
     nav.append(a);
 
 }
-console.log('nav done')

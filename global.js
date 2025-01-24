@@ -4,7 +4,7 @@ function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
 }
 
-// navLinks = $$('nav a');
+const navLinks = $$('nav a');
 
 // let currentLink = navLinks.find(
 //     (a) => a.host === location.host && a.pathname === location.pathname
@@ -20,7 +20,7 @@ let pages = [
     { url: 'projects/', title: 'Projects' },
     { url: 'resume/', title: 'Resume' },
     { url: 'contact/', title: 'Contacts' },
-    { url: 'https://github.com/stephluooo', title: 'GitHub', external: true },
+    { url: 'https://github.com/stephluooo', title: 'GitHub'},
   ];
 
   let nav = document.createElement('nav');
@@ -61,3 +61,4 @@ let pages = [
     nav.append(a);
 
 }
+console.log('nav done')

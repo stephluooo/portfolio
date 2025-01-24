@@ -81,3 +81,23 @@ document.body.insertAdjacentHTML(
     console.log('color scheme changed to', event.target.value);
     document.documentElement.style.setProperty('color-scheme', event.target.value);
   });
+
+  if (localStorage.colorScheme) {
+    // if there is already a saved color
+    const savedScheme = localStorage.colorScheme;
+    document.documentElement.style.setProperty('color-scheme', savedScheme); // Apply the saved scheme
+    select.value = savedScheme; // Update the dropdown to reflect the saved preference
+}
+
+select.addEventListener('input', function (event) {
+    const selectedScheme = event.target.value;
+
+    console.log('Color scheme changed to', selectedScheme);
+
+    // Save the user's preference to localStorage
+    localStorage.colorScheme = selectedScheme;
+
+    console.log('color scheme changed to', event.target.value);
+    
+    document.documentElement.style.setProperty('color-scheme', selectedScheme);
+});

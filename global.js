@@ -127,13 +127,19 @@ export function renderProjects(project, containerElement, headingLevel = 'h2') {
     }
 
     containerElement.innerHTML = '';
-    projects.forEach(project => {
+    project.forEach(p => {
+        const title = p.title || 'Untitled Project';
+        const image = p.image || 'https://vis-society.github.io/labs/2/images/empty.svg';
+        //image coming
+        const description = p.description || 'No description available.';
+
         const article = document.createElement('article');
         article.innerHTML = `
-            <${headingLevel}>${project.title}</${headingLevel}>
-            <img src="${project.image}" alt="${project.title}">
-            <p>${project.description}</p>
+        <${headingLevel}>${title}</${headingLevel}>
+        < img src="${image}" alt="${title}" onerror="this.src='fallback-image.jpg';">
+        <p>${description}</p >
         `;
+
         containerElement.appendChild(article);
     });
 }

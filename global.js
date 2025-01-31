@@ -148,3 +148,12 @@ export function renderProjects(project, containerElement, headingLevel = 'h2') {
         containerElement.appendChild(article);
     });
 }
+
+export function countProjects(project, titleElement){
+    if (Array.isArray(project)){
+        const projectCount = project.length;
+        titleElement.textContent = `${projectCount} Projects`;
+    } else {
+        console.error('Invalid projects data');
+    }
+}

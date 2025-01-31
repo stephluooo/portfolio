@@ -124,7 +124,7 @@ export function renderProjects(project, containerElement, headingLevel = 'h2') {
         console.error('Invalid container element provided.');
         return;
     }
-    
+
     const validHeadingLevels = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
     if (!validHeadingLevels.includes(headingLevel)) {
         console.warn(`Invalid heading level "${headingLevel}" provided. Defaulting to "h2".`);
@@ -141,7 +141,7 @@ export function renderProjects(project, containerElement, headingLevel = 'h2') {
         const article = document.createElement('article');
         article.innerHTML = `
         <${headingLevel}>${title}</${headingLevel}>
-        < img src="${image}" alt="${title}" onerror="this.src='fallback-image.jpg';">
+        <img src="${image}" alt="${title}" onerror="this.src='fallback-image.jpg';">
         <p>${description}</p >
         `;
 

@@ -120,12 +120,20 @@ export async function fetchJSON(url) {
 }
 
 export function renderProjects(project, containerElement, headingLevel = 'h2') {
+    const validHeadingLevels = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+    if (!validHeadingLevels.includes(headingLevel)) {
+        console.warn(`Invalid heading level "${headingLevel}" provided. Defaulting to "h2".`);
+        headingLevel = 'h2';
+    }
+
     containerElement.innerHTML = '';
-    const article = document.createElement('article');
-    article.innerHTML = `
-    <${headingLevel}>${project.title}</${headingLevel}>
-    <img src="${project.image}" alt="${project.title}">
-    <p>${project.description}</p>
-    `;
-    containerElement.appendChild(article);
+    projects.forEach(project => {
+        const article = document.createElement('article');
+        article.innerHTML = `
+            <${headingLevel}>${project.title}</${headingLevel}>
+            <img src="${project.image}" alt="${project.title}">
+            <p>${project.description}</p>
+        `;
+        containerElement.appendChild(article);
+    });
 }

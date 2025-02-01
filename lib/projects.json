@@ -1,13 +1,15 @@
 [
     {
-        "title": "Lorem ipsum dolor sit.",
+        "title": "DSC 80 Final Project",
+        "year": "2024",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Velit alias quae deleniti harum est deserunt quam distinctio culpa. Veritatis officia quia fugiat praesentium ratione velit tenetur sint provident omnis fuga."
+        "description": "Conducted 2022 League of Legends data analysis for thr top-one tier leagues."
     },
     {
-        "title": "Officiis officia exercitationem harum!",
+        "title": "DreamNet",
+        "year": "2024",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Corrupti dolorum et tenetur neque veritatis, maiores unde debitis ex eius voluptatibus voluptatem facere eos odit tempora repellendus iure sequi, deserunt error incidunt. Voluptates perspiciatis deserunt voluptatum blanditiis minima omnis."
+        "description": "A dream recording app"
     },
     {
         "title": "Sit saepe ea doloremque.",

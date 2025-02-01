@@ -113,3 +113,29 @@ h1, h2, h3, h4, h5, h6{
   font-family: inherit;
   padding: 0.5rem;
 }
+
+#profile-stats {
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+dl {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Four equal columns */
+  text-align: left;
+}
+
+dt {
+  font-size: 14px;
+  color: gray;
+  text-transform: uppercase;
+  grid-row: 1;
+  text-align: left;
+}
+
+dd {
+  font-size: 26px;
+  margin: 0;
+  grid-row: 2;
+  text-align: left;
+}

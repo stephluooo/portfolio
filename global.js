@@ -160,6 +160,6 @@ export function countProjects(project, titleElement){
 
 export async function fetchGitHubData(username) {
     return fetchJSON(`https://api.github.com/users/${username}`);
-  }
+}
 
 const profileStats = document.querySelector('#profile-stats');

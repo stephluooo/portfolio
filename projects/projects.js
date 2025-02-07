@@ -27,9 +27,9 @@ for (let d of data) {
   angle = endAngle;
 }
 
-// let arcGenerator = d3.arc()
-//     .innerRadius(0)
-//     .outerRadius(50); // Radius of 50, adjust as needed.
+let arcGenerator = d3.arc()
+    .innerRadius(0)
+    .outerRadius(50); // Radius of 50, adjust as needed.
 
 let arcs = arcData.map((d) => arcGenerator(d));
 

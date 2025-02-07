@@ -70,3 +70,14 @@ data.forEach((d, idx) => {
           .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`); // set the inner html of <li>
 })
 
+let query = '';
+let searchInput = document.querySelector('.searchBar');
+searchInput.addEventListener('change', (event) => {
+  // update query value
+  query = event.target.value;
+  let filteredProjects = projects.filter((project) =>
+    project.title.toLowerCase().includes(query)
+  );
+  renderProjects(filteredProjects, projectsContainer, 'h2');
+
+});

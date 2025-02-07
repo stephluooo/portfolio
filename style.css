@@ -140,13 +140,13 @@ dd {
   text-align: left;
 }
 
-.year {
+/* .year {
   font-style: italic;
   font-size: 0.9em;
   color: gray;
   text-align: left;
   margin-bottom: 0.5em;
-}
+} */
 
 #projects-pie-plot {
   max-width: 20em;

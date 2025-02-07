@@ -71,8 +71,10 @@ countProjects(projects, title)
 // })
 
 let query = '';
+
 let searchInput = document.querySelector('.searchBar');
-renderPieChart(projects);
+
+
 searchInput.addEventListener('change', (event) => {
   let filteredProjects = setQuery(event.target.value);
   // re-render legends and pie chart when event triggers
@@ -116,3 +118,5 @@ function renderPieChart(projectsGiven) {
       .html(`<span class="swatch"></span> ${d.label} <em>${d.value}</em>`);
   });
 }
+
+renderPieChart(projects);

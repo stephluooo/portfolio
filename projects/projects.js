@@ -17,13 +17,15 @@ countProjects(projects, title)
 let data = [1, 2];
 let colors = ['gold', 'purple'];
 
+let sliceGenerator = d3.pie();
+
 let total = 0;
 for (let d of data) {
   total += d;
 }
 
 let angle = 0;
-let arcData = [];
+let arcData = sliceGenerator(data);
 for (let d of data) {
   let endAngle = angle + (d / total) * 2 * Math.PI;
   arcData.push({ startAngle: angle, endAngle });

@@ -112,7 +112,7 @@ function renderPieChart(projectsGiven) {
         selectedIndex = selectedIndex === idx ? -1 : idx; // Toggle selection
       
         // Update classes for all paths
-        svg.selectAll('path')
+        newSVG.selectAll('path')
           .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
 
         // Update legend to highlight selected item

@@ -7,12 +7,12 @@ renderProjects(projects, projectsContainer, 'h2');
 const title = document.querySelector('h1');
 countProjects(projects, title)
 
-let arc = d3.arc().innerRadius(0).outerRadius(50)({
-    startAngle: 0,
-    endAngle: 2 * Math.PI,
-  });
+// let arc = d3.arc().innerRadius(0).outerRadius(50)({
+//     startAngle: 0,
+//     endAngle: 2 * Math.PI,
+//   });
 
-d3.select('svg').append('path').attr('d', arc).attr('fill', 'red');
+// d3.select('svg').append('path').attr('d', arc).attr('fill', 'red');
 
 let data = [1, 2];
 let colors = ['gold', 'purple'];
@@ -29,6 +29,10 @@ for (let d of data) {
   arcData.push({ startAngle: angle, endAngle });
   angle = endAngle;
 }
+
+let arcGenerator = d3.arc()
+    .innerRadius(0) // Inner radius for pie chart
+    .outerRadius(50); // Outer radius for pie chart
 
 let arcs = arcData.map((d) => arcGenerator(d));
 

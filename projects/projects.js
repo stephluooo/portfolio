@@ -15,6 +15,7 @@ let arc = d3.arc().innerRadius(0).outerRadius(50)({
 d3.select('svg').append('path').attr('d', arc).attr('fill', 'red');
 
 let data = [1, 2];
+let colors = ['gold', 'purple'];
 
 let total = 0;
 for (let d of data) {
@@ -31,8 +32,9 @@ for (let d of data) {
 
 let arcs = arcData.map((d) => arcGenerator(d));
 
-arcs.forEach(arc => {
-    svg.append('path')
-    .attr('d', arc)
-    .attr('fill', 'red');
-});
+arcs.forEach((arc, idx) => {
+    d3.select('svg')
+      .append('path')
+      .attr('d', arc)
+      .attr('fill', colors[idx]) 
+})

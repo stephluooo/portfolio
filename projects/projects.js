@@ -12,6 +12,8 @@ let arc = d3.arc().innerRadius(0).outerRadius(50)({
     endAngle: 2 * Math.PI,
   });
 
+d3.select('svg').append('path').attr('d', arc).attr('fill', 'red');
+
 let data = [1, 2];
 
 let total = 0;
@@ -27,17 +29,10 @@ for (let d of data) {
   angle = endAngle;
 }
 
-let arcGenerator = d3.arc()
-    .innerRadius(0)
-    .outerRadius(50); // Radius of 50, adjust as needed.
-
 let arcs = arcData.map((d) => arcGenerator(d));
 
-let svg = d3.select("#projects-pie-plot");
-
 arcs.forEach(arc => {
-    svg.append("path")
-        .attr("d", arc)
-        .attr("fill", "red") // Adjust color as needed
-        .attr("stroke-width", 1);
+    svg.append('path')
+    .attr('d', arc)
+    .attr('fill', 'red');
 });

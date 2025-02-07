@@ -14,8 +14,8 @@ countProjects(projects, title)
 
 // d3.select('svg').append('path').attr('d', arc).attr('fill', 'red');
 
-let data = [1, 2];
-let colors = ['gold', 'purple'];
+let data = [1, 2, 3, 4, 5, 5];
+let colors = d3.scaleOrdinal(d3.schemeTableau10);
 
 let sliceGenerator = d3.pie();
 
@@ -42,5 +42,5 @@ arcs.forEach((arc, idx) => {
     d3.select('svg')
       .append('path')
       .attr('d', arc)
-      .attr('fill', colors[idx]) 
+      .attr('fill', colors(idx)) 
 })

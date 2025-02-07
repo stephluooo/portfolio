@@ -139,6 +139,7 @@ export function renderProjects(project, containerElement, headingLevel = 'h2') {
         const description = p.description || 'No description available.';
 
         const article = document.createElement('article');
+        const year = p.year || '2024';
         article.innerHTML = `
         <${headingLevel}>${title}</${headingLevel}>
         <img src="${image}" alt="${title}" onerror="this.src='fallback-image.jpg';">

@@ -139,3 +139,9 @@ dd {
   grid-row: 2;
   text-align: left;
 }
+
+.year {
+  font-style: italic;
+  font-variant-numeric: oldstyle-nums;
+  color: #555;
+}

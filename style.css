@@ -154,8 +154,15 @@ dd {
   overflow: visible;
 }
 
+.container {
+  display: flex;
+  align-items: center; /* Align items vertically */
+  gap: 1rem; /* Add space between the pie chart and legend */
+}
+
 /* Legend container styling */
 .legend {
+  flex: 1;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
   gap: 0.5rem; /* Adjust for spacing between items */

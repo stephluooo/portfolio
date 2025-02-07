@@ -14,14 +14,14 @@ countProjects(projects, title)
 
 // d3.select('svg').append('path').attr('d', arc).attr('fill', 'red');
 
-let data = [
-    { value: 1, label: 'apples' },
-    { value: 2, label: 'oranges' },
-    { value: 3, label: 'mangos' },
-    { value: 4, label: 'pears' },
-    { value: 5, label: 'limes' },
-    { value: 5, label: 'cherries' },
-  ];
+// let data = [
+//     { value: 1, label: 'apples' },
+//     { value: 2, label: 'oranges' },
+//     { value: 3, label: 'mangos' },
+//     { value: 4, label: 'pears' },
+//     { value: 5, label: 'limes' },
+//     { value: 5, label: 'cherries' },
+//   ];
 let colors = d3.scaleOrdinal(d3.schemeTableau10);
 
 let sliceGenerator = d3.pie().value((d) => d.value);
@@ -59,3 +59,14 @@ data.forEach((d, idx) => {
           .attr('class', 'legend-item') // Add a class for styling
           .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`); // set the inner html of <li>
 })
+
+
+let rolledData = d3.rollups(
+  projects,
+  (v) => v.length,
+  (d) => d.year,
+);
+
+let data = rolledData.map(([year, count]) => {
+    return { value: count, label: year };
+  });

@@ -7,11 +7,6 @@ renderProjects(projects, projectsContainer, 'h2');
 const title = document.querySelector('h1');
 countProjects(projects, title)
 
-// let arc = d3.arc().innerRadius(0).outerRadius(50)({
-//     startAngle: 0,
-//     endAngle: 2 * Math.PI,
-//   });
-
 // d3.select('svg').append('path').attr('d', arc).attr('fill', 'red');
 
 // let data = [
@@ -49,9 +44,7 @@ countProjects(projects, title)
 //   angle = endAngle;
 // }
 
-// let arcGenerator = d3.arc()
-//     .innerRadius(0) // Inner radius for pie chart
-//     .outerRadius(50); // Outer radius for pie chart
+
 
 // let arcs = arcData.map((d) => arcGenerator(d));
 
@@ -70,17 +63,23 @@ countProjects(projects, title)
 //           .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`); // set the inner html of <li>
 // })
 
+let arc = d3.arc().innerRadius(0).outerRadius(50)({
+  startAngle: 0,
+  endAngle: 2 * Math.PI,
+});
+
+let arcGenerator = d3.arc()
+.innerRadius(0)
+.outerRadius(50);
+
+let filteredProjects = projects
+
 let query = '';
 
 let searchInput = document.querySelector('.searchBar');
 
+let selectedIndex = -1;
 
-searchInput.addEventListener('change', (event) => {
-  let filteredProjects = setQuery(event.target.value);
-  // re-render legends and pie chart when event triggers
-  renderProjects(filteredProjects, projectsContainer, 'h2');
-  renderPieChart(filteredProjects);
-});
 
 function renderPieChart(projectsGiven) {
   // re-calculate rolled data
@@ -101,13 +100,29 @@ function renderPieChart(projectsGiven) {
   let newSVG = d3.select('svg'); 
   newSVG.selectAll('path').remove(); // Clear all existing paths in the SVG
   let legend = d3.select('.legend');
-  legend.selectAll('*').remove(); // Clear all existing legend items
+  legend.selectAll('li').remove(); // Clear all existing legend items
+  let colors = d3.scaleOrdinal(d3.schemeTableau10);
   // update paths and legends, refer to steps 1.4 and 2.2
   newArcs.forEach((arc, idx) => {
     newSVG
       .append('path')
       .attr('d', arc)
-      .attr('fill', d3.schemeTableau10[idx]);
+      .attr('fill', colors(idx))
+      .on('click', () => {
+        selectedIndex = selectedIndex === idx ? -1 : idx; // Toggle selection
+      
+        // Update classes for all paths
+        svg.selectAll('path')
+          .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
+
+        // Update legend to highlight selected item
+        d3.select('.legend')
+          .selectAll('li')
+          .attr('class', (_, idx) => (idx === selectedIndex ? 'legend-selected legend-item' : 'legend-item'));
+        
+        // re render func
+        filterAndRenderProjects(newData);
+        });
   });
 
 
@@ -120,3 +135,37 @@ function renderPieChart(projectsGiven) {
 }
 
 renderPieChart(projects);
+
+searchInput.addEventListener('change', (event) => {
+  //update query value
+  query = event.target.value.toLowerCase();
+  //filter the projects
+  filteredProjects = projects.filter((project) => {
+        let values = Object.values(project).join('\n').toLowerCase();
+        return values.includes(query.toLowerCase());
+  });
+  // re-render legends and pie chart when event triggers
+  renderProjects(filteredProjects, projectsContainer, 'h2');
+  renderPieChart(filteredProjects);
+});
+
+function filterAndRenderProjects(newData) {
+  console.log('clicked and updating')
+
+  filteredProjects = projects.filter((project) => {
+        let values = Object.values(project).join('\n').toLowerCase();
+        return values.includes(query.toLowerCase());
+    });
+
+  if (selectedIndex === -1) {
+      // If no pie slice is selected, show all projects
+      renderProjects(filteredProjects, projectsContainer, 'h2');
+  } else {
+      // Filter projects based on the selected pie slice's year
+      let selectedYear = newData[selectedIndex].label; // Get the year label of the selected slice
+      
+      filteredProjects = filteredProjects.filter((project) => project.year === selectedYear);
+
+      renderProjects(filteredProjects, projectsContainer, 'h2'); // Update the project list
+  }
+}

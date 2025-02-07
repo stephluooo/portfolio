@@ -72,16 +72,12 @@ countProjects(projects, title)
 
 let query = '';
 let searchInput = document.querySelector('.searchBar');
+renderPieChart(projects);
 searchInput.addEventListener('change', (event) => {
-  // update query value
-  query = event.target.value;
-  // filter projects
-  let filteredProjects = projects.filter((project) => {
-    let values = Object.values(project).join('\n').toLowerCase();
-    return values.includes(query.toLowerCase());
-  });
-  // render filtered projects
+  let filteredProjects = setQuery(event.target.value);
+  // re-render legends and pie chart when event triggers
   renderProjects(filteredProjects, projectsContainer, 'h2');
+  renderPieChart(filteredProjects);
 });
 
 function renderPieChart(projectsGiven) {
@@ -100,9 +96,10 @@ function renderPieChart(projectsGiven) {
   let newArcData = newSliceGenerator(newData);
   let newArcs = newArcData.map((d) => d3.arc().innerRadius(0).outerRadius(50)(d));
   // TODO: clear up paths and legends
-  let newSVG = d3.select('svg'); // Select the SVG element
-  newSVG.selectAll('path').remove(); // Clear previously rendered paths
-  d3.select(".legend").selectAll("*").remove(); // Clear previously rendered legend items
+  let newSVG = d3.select('svg'); 
+  newSVG.selectAll('path').remove(); // Clear all existing paths in the SVG
+  let legend = d3.select('.legend');
+  legend.selectAll('*').remove(); // Clear all existing legend items
   // update paths and legends, refer to steps 1.4 and 2.2
   newArcs.forEach((arc, idx) => {
     newSVG
@@ -111,7 +108,7 @@ function renderPieChart(projectsGiven) {
       .attr('fill', d3.schemeTableau10[idx]);
   });
 
-  let legend = d3.select('.legend');
+
   newData.forEach((d, idx) => {
     legend.append('li')
       .attr('style', `--color:${d3.schemeTableau10[idx]}`)
@@ -119,4 +116,3 @@ function renderPieChart(projectsGiven) {
       .html(`<span class="swatch"></span> ${d.label} <em>${d.value}</em>`);
   });
 }
-renderPieChart(projects);

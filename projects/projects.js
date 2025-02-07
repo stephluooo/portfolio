@@ -100,11 +100,12 @@ function renderPieChart(projectsGiven) {
   let newArcData = newSliceGenerator(newData);
   let newArcs = newArcData.map((d) => d3.arc().innerRadius(0).outerRadius(50)(d));
   // TODO: clear up paths and legends
-  d3.select("svg").selectAll("*").remove();
-  d3.select(".legend").selectAll("*").remove();
+  let newSVG = d3.select('svg'); // Select the SVG element
+  newSVG.selectAll('path').remove(); // Clear previously rendered paths
+  d3.select(".legend").selectAll("*").remove(); // Clear previously rendered legend items
   // update paths and legends, refer to steps 1.4 and 2.2
   newArcs.forEach((arc, idx) => {
-    d3.select('svg')
+    newSVG
       .append('path')
       .attr('d', arc)
       .attr('fill', d3.schemeTableau10[idx]);

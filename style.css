@@ -144,9 +144,8 @@ dd {
   font-style: italic;
   font-size: 0.9em;
   color: gray;
-  position: absolute;
-  bottom: 0.5em;
-  left: 0.5em;
+  text-align: left;
+  margin-bottom: 0.5em;
 }
 
 #projects-pie-plot {

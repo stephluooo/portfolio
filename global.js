@@ -145,7 +145,7 @@ export function renderProjects(project, containerElement, headingLevel = 'h2') {
         <img src="${image}" alt="${title}" onerror="this.src='fallback-image.jpg';">
         <div>
             <p>${description}</p>
-            <br />
+            // <br />
             <p>c. ${year}</p>
         </div>
         `;

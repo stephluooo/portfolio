@@ -139,12 +139,15 @@ export function renderProjects(project, containerElement, headingLevel = 'h2') {
         const description = p.description || 'No description available.';
 
         const article = document.createElement('article');
-        const year = p.year || '2024';
+        const year = p.year || 'unkown';
         article.innerHTML = `
         <${headingLevel}>${title}</${headingLevel}>
-        <h3 class="year">c. ${year}</h3>
         <img src="${image}" alt="${title}" onerror="this.src='fallback-image.jpg';">
-        <p>${description}</p>
+        <div>
+            <p>${description}</p>
+            <br />
+            <p>c. ${year}</p>
+        </div>
         `;
 
         containerElement.appendChild(article);

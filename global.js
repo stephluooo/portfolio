@@ -142,7 +142,7 @@ export function renderProjects(project, containerElement, headingLevel = 'h2') {
         const year = p.year || '2024';
         article.innerHTML = `
         <${headingLevel}>${title}</${headingLevel}>
-        <h3 class="year">c. ${year}<h3>
+        <h3 class="year">c. ${year}</h3>
         <img src="${image}" alt="${title}" onerror="this.src='fallback-image.jpg';">
         <p>${description}</p>
         `;

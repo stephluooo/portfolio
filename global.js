@@ -20,6 +20,7 @@ let pages = [
     { url: 'projects/', title: 'Projects' },
     { url: 'resume/', title: 'Resume' },
     { url: 'contact/', title: 'Contacts' },
+    { url: 'meta/', title: 'Meta' },
     { url: 'https://github.com/stephluooo', title: 'GitHub'},
   ];
 

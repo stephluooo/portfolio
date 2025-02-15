@@ -97,6 +97,9 @@ function createScatterplot() {
   const svg = d3
     .select('#chart')
     .append('svg')
+    .attr('width', width)
+    .attr('height', height)
+    .append('g')
     .attr('viewBox', `0 0 ${width} ${height}`)
     .style('overflow', 'visible');
 
@@ -110,16 +113,8 @@ function createScatterplot() {
 
   const dots = svg.append('g').attr('class', 'dots');
 
-  dots
-    .selectAll('circle')
-    .data(commits)
-    .join('circle')
-    .attr('cx', (d) => xScale(d.datetime))
-    .attr('cy', (d) => yScale(d.hourFrac))
-    .attr('r', 5)
-    .attr('fill', 'steelblue');
   
-  const margin = { top: 10, right: 10, bottom: 30, left: 20 };
+  const margin = { top: 20, right: 30, bottom: 50, left: 50 };
 
   const usableArea = {
     top: margin.top,
@@ -149,4 +144,15 @@ function createScatterplot() {
     .append('g')
     .attr('transform', `translate(${usableArea.left}, 0)`)
     .call(yAxis);
+  
+  svg
+    .append('g')
+    .attr('class', 'dots')
+    .selectAll('circle')
+    .data(commits)
+    .join('circle')
+    .attr('cx', (d) => xScale(d.datetime))
+    .attr('cy', (d) => yScale(d.hourFrac))
+    .attr('r', 5)
+    .attr('fill', 'steelblue');
 }

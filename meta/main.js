@@ -166,9 +166,6 @@ function createScatterplot() {
       updateTooltipVisibility(true);
       updateTooltipPosition(event);
     })
-    .on('mousemove', (event) => {
-      updateTooltipPosition(event); // Keeps tooltip moving with cursor
-    })
     .on('mouseleave', () => {
       updateTooltipContent({}); 
       updateTooltipVisibility(false);
@@ -207,24 +204,6 @@ function updateTooltipVisibility(isVisible) {
 
 function updateTooltipPosition(event) {
   const tooltip = document.getElementById('commit-tooltip');
-  const offset = 15; // Distance from cursor
-
-  let left = event.clientX + offset;
-  let top = event.clientY + offset;
-
-  // Ensure the tooltip does not go off-screen
-  const tooltipWidth = tooltip.offsetWidth;
-  const tooltipHeight = tooltip.offsetHeight;
-  const windowWidth = window.innerWidth;
-  const windowHeight = window.innerHeight;
-
-  if (left + tooltipWidth > windowWidth) {
-    left = event.clientX - tooltipWidth - offset;
-  }
-  if (top + tooltipHeight > windowHeight) {
-    top = event.clientY - tooltipHeight - offset;
-  }
-
-  tooltip.style.left = `${left}px`;
-  tooltip.style.top = `${top}px`;
+  tooltip.style.left = `${event.clientX + 10}px`;
+  tooltip.style.top = `${event.clientY + 10}px`;
 }

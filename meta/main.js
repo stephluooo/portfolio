@@ -93,7 +93,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 function createScatterplot() {
   const width = 1000;
   const height = 600;
-  const sortedCommits = d3.sort(commits, (d) => -d.totalLines);
+  // const sortedCommits = d3.sort(commits, (d) => -d.totalLines);
+  const sortedCommits = [...commits].sort((a, b) => b.totalLines - a.totalLines);
 
   const svg = d3
     .select('#chart')
@@ -140,7 +141,7 @@ function createScatterplot() {
   const rScale = d3
   .scaleSqrt() // Change only this line
   .domain([minLines, maxLines])
-  .range([2, 30]);
+  .range([3, 30]);
 
   // Create the axes
   const xAxis = d3.axisBottom(xScale);

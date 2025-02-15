@@ -255,15 +255,14 @@ path {
 
 .tooltip {
   position: fixed;
-  background: rgba(255, 255, 255, 0.95); /* Semi-transparent white */
+  top: 1em;
+  left: 1em;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 8px;
   border: 1px solid #ddd;
-  border-radius: 8px; /* Smoother corners */
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); /* More subtle shadow */
-  padding: 10px;
-  backdrop-filter: blur(5px); /* Frosted glass effect */
+  border-radius: 6px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
   opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease-in-out;
 }
 
 dl.info {
@@ -275,19 +274,27 @@ dl.info {
   opacity: 1;
 }
 
+.info dt {
+  font-weight: normal;
+  color: #555;
+}
+
+.info dd {
+  font-weight: bold;
+  margin: 0;
+}
+
 dl.info[hidden]:not(:hover, :focus-within) {
   opacity: 0;
   visibility: hidden;
 }
 
-dl.info dt {
-  font-weight: bold;
-  color: #555;
-}
-
-dl.info dd {
-  margin: 0;
-  color: #222;
+#commit-tooltip {
+  background-color: white;
+  box-shadow: 10px 5px 5px oklch(86.52% 0 127);
+  border-radius: 10px;
+  backdrop-filter: 10px;
+  padding: 1em;
 }
 
 circle {

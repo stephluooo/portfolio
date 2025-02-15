@@ -162,7 +162,7 @@ function createScatterplot() {
     .attr('r', 5)
     .attr('fill', 'steelblue')
     .on('mouseenter', (event, commit) => {
-      updateTooltipContent(commit);
+      updateTooltipContent(commit, event);
     })
     .on('mouseleave', () => {
       updateTooltipContent({}); 
@@ -170,13 +170,17 @@ function createScatterplot() {
 }
 
 function updateTooltipContent(commit) {
+  const tooltip = document.getElementById('commit-tooltip');
   const link = document.getElementById('commit-link');
   const date = document.getElementById('commit-date');
   const time = document.getElementById('commit-time');
   const author = document.getElementById('commit-author');
   const lines = document.getElementById('commit-lines');
 
-  if (Object.keys(commit).length === 0) return;
+  if (Object.keys(commit).length === 0) {
+    tooltip.style.opacity = '0';
+    return;
+  }
 
   link.href = commit.url;
   link.textContent = commit.id;
@@ -186,4 +190,10 @@ function updateTooltipContent(commit) {
   time.textContent = commit.time;
   author.textContent = commit.author;
   lines.textContent = commit.totalLines;
+
+  if (event) {
+    tooltip.style.opacity = '1';
+    tooltip.style.left = `${event.pageX + 15}px`;
+    tooltip.style.top = `${event.pageY + 15}px`;
+  }
 }

@@ -220,3 +220,25 @@ path {
   --color: oklch(60% 45% 0) !important; /*highlight color*/
   background-color: var(--color); /* Override background */
 }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.stats dt {
+  font-size: 0.85em;
+  color: #6c757d;
+  text-transform: uppercase;
+}
+
+.stats dd {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 0;
+}

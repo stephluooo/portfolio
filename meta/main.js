@@ -11,8 +11,7 @@ async function loadData() {
     datetime: new Date(row.datetime),
   }));
 
-  processCommits();
-  console.log(commits);
+  displayStats();
 }
 
 function processCommits() {
@@ -42,6 +41,48 @@ function processCommits() {
 
       return ret;
     });
+}
+
+function displayStats() {
+  // Process commits first
+  processCommits();
+
+  // Create the dl element
+  const dl = d3.select('#stats').append('dl').attr('class', 'stats');
+
+  // Add total LOC
+  dl.append('dt').html('Total <abbr title="Lines of code">LOC</abbr>');
+  dl.append('dd').text(data.length);
+
+  // Add total commits
+  dl.append('dt').text('Total commits');
+  dl.append('dd').text(commits.length);
+
+  // Add number of unique files in the codebase
+  const uniqueFiles = new Set(data.map(d => d.file)).size;
+  dl.append('dt').text('Files');
+  dl.append('dd').text(uniqueFiles);
+
+  // Add maximum file length (in lines)
+  const maxFileLength = d3.max(d3.rollups(data, v => v.length, d => d.file), d => d[1]);
+  dl.append('dt').text('Max File Length');
+  dl.append('dd').text(maxFileLength);
+
+  // Add longest line (by character length)
+  const longestLine = d3.max(data, d => d.length);
+  dl.append('dt').text('Longest Line');
+  dl.append('dd').text(longestLine);
+
+  // Add maximum depth
+  const maxDepth = d3.max(data, d => d.depth);
+  dl.append('dt').text('Max Depth');
+  dl.append('dd').text(maxDepth);
+
+  // Add average file length (in lines)
+  const avgFileLength = d3.mean(d3.rollups(data, v => v.length, d => d.file), d => d[1]);
+  dl.append('dt').text('Avg File Length');
+  dl.append('dd').text(avgFileLength.toFixed(2));
+
 }
 
 document.addEventListener('DOMContentLoaded', async () => {

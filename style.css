@@ -316,7 +316,6 @@ dl.info[hidden]:not(:hover, :focus-within) {
   border: 1px solid #ddd;
   border-radius: 6px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-  white-space: nowrap;
   transition: opacity 200ms ease-in-out;
   opacity: 0;
 }

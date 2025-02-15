@@ -266,7 +266,7 @@ circle:hover {
 dl.info {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 4px 12px;
+  gap: 0.2rem;
   transition-duration: 500ms;
   transition-property: opacity, visibility;
   opacity: 1;
@@ -292,10 +292,13 @@ dl.info dd {
   top: 1em;
   left: 1em;
   background: rgba(255, 255, 255, 0.9);
-  padding: 8px;
+  padding: 1rem;
   border: 1px solid #ddd;
   border-radius: 6px;
+  transition-duration: 400ms;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
   /* opacity: 0; */
 }
 

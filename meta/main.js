@@ -141,7 +141,7 @@ function createScatterplot() {
   const rScale = d3
   .scaleSqrt() // Change only this line
   .domain([minLines, maxLines])
-  .range([2, 30]);
+  .range([6, 50]);
 
   // Create the axes
   const xAxis = d3.axisBottom(xScale);
@@ -159,7 +159,7 @@ function createScatterplot() {
     .attr('transform', `translate(${usableArea.left}, 0)`)
     .call(yAxis);
   
-    const dots = svg.append('g').attr('class', 'dots');
+  const dots = svg.append('g').attr('class', 'dots');
     
   dots
     .selectAll('circle')
@@ -170,28 +170,19 @@ function createScatterplot() {
     .attr('r', (d) => rScale(d.totalLines))
     .attr('fill', 'steelblue')
     .style('fill-opacity', 0.7)
-    .on('mouseenter', function (event, commit) {
-      // Bring circle to full opacity on hover
-      d3.select(this).style('fill-opacity', 1);
-
-      // Update tooltip content and show it
-      updateTooltipContent(commit);
+    .on('mouseenter', function (event, d) {
+      d3.select(event.currentTarget).style('fill-opacity', 1); // Full opacity on hover
+      updateTooltipContent(d);
       updateTooltipVisibility(true);
-
-      // Position tooltip near mouse
-      updateTooltipPosition(event);
-    })
-    .on('mousemove', function (event) {
-      // Update position so it follows the mouse
       updateTooltipPosition(event);
     })
     .on('mouseleave', function () {
-      // Return circle to normal opacity
-      d3.select(this).style('fill-opacity', 0.7);
-
-      // Clear tooltip and hide it
+      d3.select(event.currentTarget).style('fill-opacity', 0.7); // Restore transparency
       updateTooltipContent({});
       updateTooltipVisibility(false);
+    })
+    .on('mousemove', (event) => {
+      updateTooltipPosition(event);
     });
 
   // dots
@@ -222,57 +213,22 @@ function createScatterplot() {
 function updateTooltipContent(commit) {
   const link = document.getElementById('commit-link');
   const date = document.getElementById('commit-date');
-  const authors = document.getElementById('commit-author');
   const time = document.getElementById('commit-time');
+  const author = document.getElementById('commit-author');
   const lines = document.getElementById('commit-lines');
 
-
-  // if (Object.keys(commit).length === 0) return;
-
-  // link.href = commit.url;
-  // link.textContent = commit.id;
-
-  // authors.href = 'https://github.com/stephluooo';
-  // authors.textContent = commit.author;
-
-  // time.textContent = commit.time;
-
-  // lines.textContent = commit.lines.length;
-
-  // date.textContent = commit.datetime?.toLocaleString('en', {
-  //   dateStyle: 'full',
-  // });
-  if (!commit || Object.keys(commit).length === 0) {
-    link.href = '';
-    link.textContent = '';
-    date.textContent = '';
-    authors.textContent = '';
-    time.textContent = '';
-    lines.textContent = '';
-    return;
-  }
+  if (Object.keys(commit).length === 0) return;
 
   link.href = commit.url;
   link.textContent = commit.id;
-
-  authors.textContent = commit.author || '(unknown)';
-
-  // Show time as HH:MM
-  if (commit.datetime) {
-    time.textContent = commit.datetime.toLocaleTimeString([], {
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-    date.textContent = commit.datetime.toLocaleString('en', {
-      dateStyle: 'full',
-    });
-  } else {
-    time.textContent = '';
-    date.textContent = '';
-  }
-
-  // If you store total lines as a number
-  lines.textContent = commit.totalLines ?? 0;
+  date.textContent = commit.datetime?.toLocaleString('en', {
+    dateStyle: 'full',
+  });
+  time.textContent = commit.datetime?.toLocaleString('en', {
+    timeStyle: 'short',
+  });
+  author.textContent = commit.author;
+  lines.textContent = commit.totalLines;
 }
 
 function updateTooltipVisibility(isVisible) {
@@ -282,7 +238,6 @@ function updateTooltipVisibility(isVisible) {
 
 function updateTooltipPosition(event) {
   const tooltip = document.getElementById('commit-tooltip');
-  const offset = 10;
   tooltip.style.left = `${event.clientX}px`;
   tooltip.style.top = `${event.clientY}px`;
 }

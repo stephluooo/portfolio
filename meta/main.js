@@ -1,10 +1,6 @@
 let data = [];
 let commits = [];
 
-document.addEventListener('DOMContentLoaded', async () => {
-  await loadData();
-});
-
 async function loadData() {
   data = await d3.csv('loc.csv', (row) => ({
     ...row,
@@ -47,5 +43,9 @@ function processCommits() {
       return ret;
     });
 }
+
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadData();
+});
 
 

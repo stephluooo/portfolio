@@ -242,7 +242,23 @@ function updateTooltipVisibility(isVisible) {
 
 function updateTooltipPosition(event) {
   const tooltip = document.getElementById('commit-tooltip');
-  tooltip.style.left = `${event.clientX}px`;
-  tooltip.style.top = `${event.clientY}px`;
+  const tooltipWidth = tooltip.offsetWidth;
+  const tooltipHeight = tooltip.offsetHeight;
+
+  let x = event.clientX + 20; // Default position to right of cursor
+  let y = event.clientY + 20; // Default position slightly below cursor
+
+  // Prevent tooltip from going off the right edge
+  if (x + tooltipWidth > window.innerWidth) {
+    x = event.clientX - tooltipWidth - 20; // Move left if overflow
+  }
+
+  // Prevent tooltip from going off the bottom
+  if (y + tooltipHeight > window.innerHeight) {
+    y = event.clientY - tooltipHeight - 20; // Move up if overflow
+  }
+
+  tooltip.style.left = `${x}px`;
+  tooltip.style.top = `${y}px`;
 }
 

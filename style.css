@@ -282,12 +282,12 @@ dl.info {
 
 dl.info dt {
   font-weight: normal;
-  color: #555;
+  color: #222;
 }
 
 dl.info dd {
-  font-weight: bold;
-  color: #222;
+  font-weight: normal;
+  color: #333;
 }
 
 dl.info[hidden]:not(:hover, :focus-within) {

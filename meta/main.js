@@ -161,43 +161,44 @@ function createScatterplot() {
     .attr('cy', (d) => yScale(d.hourFrac))
     .attr('r', 5)
     .attr('fill', 'steelblue')
+    .style('fill-opacity', 0.7)
     .on('mouseenter', (event, commit) => {
-      updateTooltipContent(commit, event);
-      updateTooltipVisibility(true);
-      updateTooltipPosition(event);
-    })
-    .on('mousemove', (event) => {
-      updateTooltipPosition(event); // Keeps tooltip moving with cursor
+        d3.select(event.currentTarget).style('fill-opacity', 1); 
+        updateTooltipContent(commit);
+        updateTooltipVisibility(true);
+        updateTooltipPosition(event);
     })
     .on('mouseleave', () => {
-      updateTooltipContent({}); 
-      updateTooltipVisibility(false);
+        d3.select(event.currentTarget).style('fill-opacity', 0.7);
+        updateTooltipContent({}); // Clear tooltip content
+        updateTooltipVisibility(false);
     });
 }
 
+
 function updateTooltipContent(commit) {
-  const tooltip = document.getElementById('commit-tooltip');
   const link = document.getElementById('commit-link');
   const date = document.getElementById('commit-date');
+  const authors = document.getElementById('commit-author');
   const time = document.getElementById('commit-time');
-  const author = document.getElementById('commit-author');
   const lines = document.getElementById('commit-lines');
 
-  if (Object.keys(commit).length === 0) {
-    tooltip.style.opacity = '0';
-    return;
-  }
+
+  if (Object.keys(commit).length === 0) return;
 
   link.href = commit.url;
   link.textContent = commit.id;
-  date.textContent = commit.datetime?.toLocaleString('en', {
-      dateStyle: 'full',
-  });
-  time.textContent = commit.time;
-  author.textContent = commit.author;
-  lines.textContent = commit.totalLines;
 
-  tooltip.hidden = false;
+  authors.href = 'https://github.com/stephluooo';
+  authors.textContent = commit.author;
+
+  time.textContent = commit.time;
+
+  lines.textContent = commit.lines.length;
+
+  date.textContent = commit.datetime?.toLocaleString('en', {
+    dateStyle: 'full',
+  });
 }
 
 function updateTooltipVisibility(isVisible) {
@@ -207,24 +208,6 @@ function updateTooltipVisibility(isVisible) {
 
 function updateTooltipPosition(event) {
   const tooltip = document.getElementById('commit-tooltip');
-  const offset = 15; // Distance from cursor
-
-  let left = event.clientX + offset;
-  let top = event.clientY + offset;
-
-  // Ensure the tooltip does not go off-screen
-  const tooltipWidth = tooltip.offsetWidth;
-  const tooltipHeight = tooltip.offsetHeight;
-  const windowWidth = window.innerWidth;
-  const windowHeight = window.innerHeight;
-
-  if (left + tooltipWidth > windowWidth) {
-    left = event.clientX - tooltipWidth - offset;
-  }
-  if (top + tooltipHeight > windowHeight) {
-    top = event.clientY - tooltipHeight - offset;
-  }
-
-  tooltip.style.left = `${left}px`;
-  tooltip.style.top = `${top}px`;
+  tooltip.style.left = `${event.clientX}px`;
+  tooltip.style.top = `${event.clientY}px`;
 }

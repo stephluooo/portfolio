@@ -257,24 +257,21 @@ path {
   position: fixed;
   top: 1em;
   left: 1em;
-  background: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
-  border: 1px solid #ccc;
-  padding: 10px;
-  border-radius: 6px; /* Rounded corners */
-  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2); /* Subtle elevation */
-  backdrop-filter: blur(5px); /* Frosted glass effect */
-  opacity: 1;
-  transition: opacity 0.3s ease-in-out;
-  pointer-events: none;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  opacity: 0;
 }
 
 dl.info {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 4px 8px;
-  align-items: center;
+  gap: 4px 12px;
   transition-duration: 500ms;
   transition-property: opacity, visibility;
+  opacity: 1;
 }
 
 dl.info[hidden]:not(:hover, :focus-within) {

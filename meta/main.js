@@ -221,8 +221,34 @@ function updateTooltipVisibility(isVisible) {
 
 function updateTooltipPosition(event) {
   const tooltip = document.getElementById('commit-tooltip');
-  tooltip.style.left = `${event.clientX + 8}px`;
-  tooltip.style.top = `${event.clientY}px`;
+  const tooltipWidth = tooltip.offsetWidth;
+  const tooltipHeight = tooltip.offsetHeight;
+
+  let x = event.clientX + 20; // Default position to the right of the cursor
+  let y = event.clientY + 20; // Default position slightly below the cursor
+
+  // Ensure tooltip does not overflow right edge
+  if (x + tooltipWidth > window.innerWidth) {
+    x = event.clientX - tooltipWidth - 20; // Move left if it overflows
+  }
+
+  // Ensure tooltip does not overflow bottom edge
+  if (y + tooltipHeight > window.innerHeight) {
+    y = event.clientY - tooltipHeight - 20; // Move up if it overflows
+  }
+
+  // Ensure tooltip does not go off the top
+  if (y < 0) {
+    y = 10; // Adjust to keep within the viewport
+  }
+
+  // Ensure tooltip does not go off the left
+  if (x < 0) {
+    x = 10; // Adjust to keep within the viewport
+  }
+
+  tooltip.style.left = `${x}px`;
+  tooltip.style.top = `${y}px`;
 }
 
 function brushed(event) {

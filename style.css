@@ -274,27 +274,19 @@ dl.info {
   opacity: 1;
 }
 
-.info dt {
-  font-weight: normal;
-  color: #555;
-}
-
-.info dd {
-  font-weight: bold;
-  margin: 0;
-}
-
 dl.info[hidden]:not(:hover, :focus-within) {
   opacity: 0;
   visibility: hidden;
 }
 
-#commit-tooltip {
-  background-color: white;
-  box-shadow: 10px 5px 5px oklch(86.52% 0 127);
-  border-radius: 10px;
-  backdrop-filter: 10px;
-  padding: 1em;
+dl.info dt {
+  font-weight: bold;
+  color: #555;
+}
+
+dl.info dd {
+  margin: 0;
+  color: #222;
 }
 
 circle {

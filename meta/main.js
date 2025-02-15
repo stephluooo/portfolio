@@ -1,10 +1,6 @@
 let data = [];
 let commits = [];
 
-async function loadData() {
-  data = await d3.csv('./loc.csv');
-}
-
 document.addEventListener('DOMContentLoaded', async () => {
   await loadData();
 });

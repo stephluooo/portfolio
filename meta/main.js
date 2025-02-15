@@ -163,9 +163,11 @@ function createScatterplot() {
     .attr('fill', 'steelblue')
     .on('mouseenter', (event, commit) => {
       updateTooltipContent(commit, event);
+      updateTooltipVisibility(true);
     })
     .on('mouseleave', () => {
       updateTooltipContent({}); 
+      updateTooltipVisibility(false);
     });
 }
 
@@ -196,4 +198,9 @@ function updateTooltipContent(commit) {
     tooltip.style.left = `${event.pageX + 15}px`;
     tooltip.style.top = `${event.pageY + 15}px`;
   }
+}
+
+function updateTooltipVisibility(isVisible) {
+  const tooltip = document.getElementById('commit-tooltip');
+  tooltip.hidden = !isVisible;
 }

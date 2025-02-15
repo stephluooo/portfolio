@@ -254,7 +254,7 @@ path {
 }
 
 .tooltip {
-  position: absolute;
+  position: fixed;
   top: 1em;
   left: 1em;
   background: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
@@ -263,7 +263,7 @@ path {
   border-radius: 6px; /* Rounded corners */
   box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2); /* Subtle elevation */
   backdrop-filter: blur(5px); /* Frosted glass effect */
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.3s ease-in-out;
   pointer-events: none;
 }

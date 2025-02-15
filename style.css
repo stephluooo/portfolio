@@ -253,16 +253,14 @@ path {
   shape-rendering: crispEdges;
 }
 
-.tooltip {
-  position: fixed;
-  top: 1em;
-  left: 1em;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-  opacity: 0;
+circle {
+  transition: 200ms;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+circle:hover {
+  transform: scale(1.5);
 }
 
 dl.info {
@@ -285,16 +283,20 @@ dl.info dt {
 }
 
 dl.info dd {
-  margin: 0;
+  /* margin: 0; */
   color: #222;
 }
 
-circle {
-  transition: 200ms;
-  transform-origin: center;
-  transform-box: fill-box;
+.tooltip {
+  position: fixed;
+  top: 1em;
+  left: 1em;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  opacity: 0;
 }
 
-circle:hover {
-  transform: scale(1.5);
-}
+

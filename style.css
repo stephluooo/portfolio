@@ -223,7 +223,8 @@ path {
 
 .stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  width: 100%;
   gap: 15px;
   background: #f8f9fa;
   padding: 20px;
@@ -279,11 +280,6 @@ dl.info {
   opacity: 1;
 }
 
-dl.info[hidden]:not(:hover, :focus-within) {
-  opacity: 0;
-  visibility: hidden;
-}
-
 dl.info dt {
   font-weight: normal;
   color: #555;
@@ -291,7 +287,12 @@ dl.info dt {
 
 dl.info dd {
   font-weight: bold;
-  margin: 0;
+  color: #222;
+}
+
+dl.info[hidden]:not(:hover, :focus-within) {
+  opacity: 0;
+  visibility: hidden;
 }
 
 .tooltip {
@@ -311,10 +312,12 @@ dl.info dd {
   top: 1em;
   left: 1em;
   background: rgba(255, 255, 255, 0.9);
-  padding: 8px;
+  padding: 10px;
   border: 1px solid #ddd;
   border-radius: 6px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
+  transition: opacity 200ms ease-in-out;
   opacity: 0;
 }
 

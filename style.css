@@ -280,14 +280,14 @@ dl.info {
   opacity: 1;
 }
 
-dl.info dt {
+.info dt {
   font-weight: normal;
-  color: #222;
+  color: #555;
 }
 
-dl.info dd {
-  font-weight: normal;
-  color: #333;
+.info dd {
+  font-weight: bold;
+  margin: 0;
 }
 
 dl.info[hidden]:not(:hover, :focus-within) {
@@ -296,28 +296,52 @@ dl.info[hidden]:not(:hover, :focus-within) {
 }
 
 .tooltip {
-  /* position: fixed;
-  top: 1em;
-  left: 1em;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  transition-duration: 400ms;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  opacity: 0; */
   position: fixed;
   top: 1em;
   left: 1em;
   background: rgba(255, 255, 255, 0.9);
-  padding: 10px;
+  padding: 8px;
   border: 1px solid #ddd;
   border-radius: 6px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-  transition: opacity 200ms ease-in-out;
   opacity: 0;
+}
+
+/* Brush Selection Styles */
+@keyframes marching-ants {
+  to {
+    stroke-dashoffset: -8; /* 5 + 3 */
+  }
+}
+
+.selection {
+  fill-opacity: 0.1;
+  stroke: black;
+  stroke-opacity: 0.7;
+  stroke-dasharray: 5 3;
+  animation: marching-ants 2s linear infinite;
+}
+
+/* Selected Dots Styles */
+circle.selected {
+  fill: #fa6262;
+}
+
+/* Language Breakdown Styles */
+#language-breakdown {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  padding-left: 2rem;
+  padding-right: 2rem;
+  text-align: center; /* Center the text */
+}
+
+#language-breakdown dt {
+  font-weight: bold;
+}
+
+#language-breakdown dd {
+  margin: 0;
 }
 
 

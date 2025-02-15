@@ -93,6 +93,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 function createScatterplot() {
   const width = 1000;
   const height = 600;
+  const sortedCommits = d3.sort(commits, (d) => -d.totalLines);
 
   const svg = d3
     .select('#chart')
@@ -135,6 +136,12 @@ function createScatterplot() {
   // Create gridlines as an axis with no labels and full-width ticks
   gridlines.call(d3.axisLeft(yScale).tickFormat('').tickSize(-usableArea.width));
 
+  const [minLines, maxLines] = d3.extent(commits, (d) => d.totalLines);
+  const rScale = d3
+  .scaleSqrt() // Change only this line
+  .domain([minLines, maxLines])
+  .range([2, 30]);
+
   // Create the axes
   const xAxis = d3.axisBottom(xScale);
   const yAxis = d3.axisLeft(yScale).tickFormat((d) => String(d % 24).padStart(2, '0') + ':00');
@@ -155,21 +162,21 @@ function createScatterplot() {
 
   dots
     .selectAll('circle')
-    .data(commits)
+    .data(sortedCommits)
     .join('circle')
     .attr('cx', (d) => xScale(d.datetime))
     .attr('cy', (d) => yScale(d.hourFrac))
     .attr('r', 5)
     .attr('fill', 'steelblue')
-    .style('fill-opacity', 0.7)
-    .on('mouseenter', (event, commit) => {
-        d3.select(event.currentTarget).style('fill-opacity', 1); 
+    .style('fill-opacity', 0.7) // Add transparency for overlapping dots
+    .on('mouseenter', function (event, d, i) {
+    d3.select(event.currentTarget).style('fill-opacity', 1); 
         updateTooltipContent(commit);
         updateTooltipVisibility(true);
         updateTooltipPosition(event);
     })
-    .on('mouseleave', () => {
-        d3.select(event.currentTarget).style('fill-opacity', 0.7);
+    .on('mouseleave', function () {
+      d3.select(event.currentTarget).style('fill-opacity', 0.7);
         updateTooltipContent({}); // Clear tooltip content
         updateTooltipVisibility(false);
     });
@@ -211,3 +218,4 @@ function updateTooltipPosition(event) {
   tooltip.style.left = `${event.clientX}px`;
   tooltip.style.top = `${event.clientY}px`;
 }
+

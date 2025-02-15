@@ -1,5 +1,6 @@
 let data = [];
 let commits = [];
+let xScale, yScale;
 
 async function loadData() {
   data = await d3.csv('loc.csv', (row) => ({
@@ -12,6 +13,7 @@ async function loadData() {
   }));
 
   displayStats();
+  createScatterplot();
 }
 
 function processCommits() {
@@ -47,16 +49,19 @@ function displayStats() {
   // Process commits first
   processCommits();
 
+  // Add the title above the dl element
+  d3.select('#stats').append('h2').text('Summary');
+
   // Create the dl element
   const dl = d3.select('#stats').append('dl').attr('class', 'stats');
-
-  // Add total LOC
-  dl.append('dt').html('Total <abbr title="Lines of code">LOC</abbr>');
-  dl.append('dd').text(data.length);
 
   // Add total commits
   dl.append('dt').text('Total commits');
   dl.append('dd').text(commits.length);
+
+  // Add total LOC
+  dl.append('dt').html('Total LOC');
+  dl.append('dd').text(data.length);
 
   // Add number of unique files in the codebase
   const uniqueFiles = new Set(data.map(d => d.file)).size;
@@ -87,7 +92,6 @@ function displayStats() {
 
 document.addEventListener('DOMContentLoaded', async () => {
   await loadData();
-  createScatterplot();
 });
 
 function createScatterplot() {

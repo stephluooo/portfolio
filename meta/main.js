@@ -200,7 +200,13 @@ function updateTooltipContent(commit) {
   const author = document.getElementById('commit-author');
   const lines = document.getElementById('commit-lines');
 
-  if (Object.keys(commit).length === 0) return;
+  if (Object.keys(commit).length === 0) {
+    tooltip.hidden = true; // Hide the tooltip when no commit is hovered
+    return;
+  }
+
+  tooltip.hidden = false; // Show only when there is a valid commit
+  tooltip.style.opacity = "1"; // Ensure visibility
 
   link.href = commit.url;
   link.textContent = commit.id;
@@ -216,7 +222,13 @@ function updateTooltipContent(commit) {
 
 function updateTooltipVisibility(isVisible) {
   const tooltip = document.getElementById('commit-tooltip');
-  tooltip.hidden = !isVisible;
+  if (isVisible && tooltip.textContent.trim() !== "") {
+    tooltip.hidden = false;
+    tooltip.style.opacity = "1";
+  } else {
+    tooltip.hidden = true;
+    tooltip.style.opacity = "0";
+  }
 }
 
 function updateTooltipPosition(event) {

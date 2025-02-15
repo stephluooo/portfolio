@@ -94,9 +94,6 @@ function createScatterplot() {
   const width = 1000;
   const height = 600;
   const sortedCommits = d3.sort(commits, (d) => -d.totalLines);
-  const maxThreshold = 30; // Adjust this based on your data distribution
-  const filteredCommits = commits.filter(d => d.totalLines <= maxThreshold);
-
 
   const svg = d3
     .select('#chart')
@@ -109,8 +106,7 @@ function createScatterplot() {
 
   const xScale = d3
     .scaleTime()
-    // .domain(d3.extent(commits, (d) => d.datetime))
-    .domain(d3.extent(filteredCommits, (d) => d.datetime))
+    .domain(d3.extent(commits, (d) => d.datetime))
     .range([0, width])
     .nice();
 
@@ -141,8 +137,7 @@ function createScatterplot() {
   // Create gridlines as an axis with no labels and full-width ticks
   gridlines.call(d3.axisLeft(yScale).tickFormat('').tickSize(-usableArea.width));
 
-  // const [minLines, maxLines] = d3.extent(commits, (d) => d.totalLines);
-  const [minLines, maxLines] = d3.extent(filteredCommits, (d) => d.totalLines);
+  const [minLines, maxLines] = d3.extent(commits, (d) => d.totalLines);
   const rScale = d3
   .scaleSqrt() // Change only this line
   .domain([minLines, maxLines])

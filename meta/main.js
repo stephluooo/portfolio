@@ -18,6 +18,9 @@ async function loadData() {
     date: new Date(row.date + 'T00:00' + row.timezone),
     datetime: new Date(row.datetime),
   }));
+
+  processCommits();
+  console.log(commits);
 }
 
 function processCommits() {
@@ -49,16 +52,4 @@ function processCommits() {
     });
 }
 
-async function loadData() {
-  data = await d3.csv('./loc.csv', (row) => ({
-    ...row,
-    line: Number(row.line), // Convert line to number
-    depth: Number(row.depth), // Convert depth to number
-    length: Number(row.length), // Convert length to number
-    date: new Date(row.date + 'T00:00' + row.timezone), // Convert date with timezone
-    datetime: new Date(row.datetime), // Convert datetime to JS Date object
-  }));
 
-  processCommits();
-  console.log(commits);
-}

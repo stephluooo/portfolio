@@ -164,6 +164,7 @@ function createScatterplot() {
     .on('mouseenter', (event, commit) => {
       updateTooltipContent(commit, event);
       updateTooltipVisibility(true);
+      updateTooltipPosition(event);
     })
     .on('mouseleave', () => {
       updateTooltipContent({}); 
@@ -210,9 +211,3 @@ function updateTooltipPosition(event) {
   tooltip.style.left = `${event.clientX}px`;
   tooltip.style.top = `${event.clientY}px`;
 }
-
-dots.on('mouseenter', (event, commit) => {
-  updateTooltipContent(commit);
-  updateTooltipVisibility(true);
-  updateTooltipPosition(event);
-});

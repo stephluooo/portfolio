@@ -166,18 +166,19 @@ function createScatterplot() {
     .join('circle')
     .attr('cx', (d) => xScale(d.datetime))
     .attr('cy', (d) => yScale(d.hourFrac))
-    .attr('r', 5)
+    .attr('r', (d) => rScale(d.totalLines))
+    // .attr('r', 5)
     .attr('fill', 'steelblue')
     .style('fill-opacity', 0.7) // Add transparency for overlapping dots
     .on('mouseenter', function (event, commit) {
-      d3.select(event.currentTarget).style('fill-opacity', 1);
+      d3.select(event.currentTarget).style('fill-opacity', 1).attr('r', (d) => rScale(d.totalLines) * 1.2);
       updateTooltipContent(commit);
       updateTooltipVisibility(true);
       updateTooltipPosition(event);
     })
     .on('mousemove', updateTooltipPosition)
     .on('mouseleave', function () {
-      d3.select(event.currentTarget).style('fill-opacity', 0.7);
+      d3.select(event.currentTarget).style('fill-opacity', 0.7).attr('r', (d) => rScale(d.totalLines));
       updateTooltipContent({});
       updateTooltipVisibility(false);
     });

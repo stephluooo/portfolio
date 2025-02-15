@@ -63,10 +63,10 @@ function displayStats() {
   dl.append('dt').text('Files');
   dl.append('dd').text(uniqueFiles);
 
-  // Add maximum file length (in lines)
-  const maxFileLength = d3.max(d3.rollups(data, v => v.length, d => d.file), d => d[1]);
-  dl.append('dt').text('Max File Length');
-  dl.append('dd').text(maxFileLength);
+  // // Add maximum file length (in lines)
+  // const maxFileLength = d3.max(d3.rollups(data, v => v.length, d => d.file), d => d[1]);
+  // dl.append('dt').text('Max File Length');
+  // dl.append('dd').text(maxFileLength);
 
   // Add longest line (by character length)
   const longestLine = d3.max(data, d => d.length);

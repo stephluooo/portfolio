@@ -133,6 +133,7 @@ function createScatterplot() {
   .attr('class', 'gridlines')
   .attr('transform', `translate(${usableArea.left}, 0)`);
 
+
   // Create gridlines as an axis with no labels and full-width ticks
   gridlines.call(d3.axisLeft(yScale).tickFormat('').tickSize(-usableArea.width));
 
@@ -160,14 +161,38 @@ function createScatterplot() {
   
     const dots = svg.append('g').attr('class', 'dots');
     
-    dots
-      .selectAll('circle')
-      .data(sortedCommits)
-      .join('circle')
-      .attr('cx', (d) => xScale(d.datetime))
-      .attr('cy', (d) => yScale(d.hourFrac))
-      .attr('r', 5)
-      .attr('fill', 'steelblue');
+  dots
+    .selectAll('circle')
+    .data(sortedCommits)
+    .join('circle')
+    .attr('cx', (d) => xScale(d.datetime))
+    .attr('cy', (d) => yScale(d.hourFrac))
+    .attr('r', (d) => rScale(d.totalLines))
+    .attr('fill', 'steelblue')
+    .style('fill-opacity', 0.7)
+    .on('mouseenter', function (event, commit) {
+      // Bring circle to full opacity on hover
+      d3.select(this).style('fill-opacity', 1);
+
+      // Update tooltip content and show it
+      updateTooltipContent(commit);
+      updateTooltipVisibility(true);
+
+      // Position tooltip near mouse
+      updateTooltipPosition(event);
+    })
+    .on('mousemove', function (event) {
+      // Update position so it follows the mouse
+      updateTooltipPosition(event);
+    })
+    .on('mouseleave', function () {
+      // Return circle to normal opacity
+      d3.select(this).style('fill-opacity', 0.7);
+
+      // Clear tooltip and hide it
+      updateTooltipContent({});
+      updateTooltipVisibility(false);
+    });
 
   // dots
   //   .selectAll('circle')
@@ -191,21 +216,6 @@ function createScatterplot() {
   //     updateTooltipContent({});
   //     updateTooltipVisibility(false);
   //   });
-  dots
-    .selectAll('circle')
-    .attr('r', (d) => rScale(d.totalLines))
-    .style('fill-opacity', 0.7)
-    .on('mouseenter', (event, commit) => {
-        d3.select(event.currentTarget).style('fill-opacity', 1); 
-        updateTooltipContent(commit);
-        updateTooltipVisibility(true);
-        updateTooltipPosition(event);
-    })
-    .on('mouseleave', () => {
-        d3.select(event.currentTarget).style('fill-opacity', 0.7);
-        updateTooltipContent({}); // Clear tooltip content
-        updateTooltipVisibility(false);
-    });
 }
 
 
@@ -217,21 +227,52 @@ function updateTooltipContent(commit) {
   const lines = document.getElementById('commit-lines');
 
 
-  if (Object.keys(commit).length === 0) return;
+  // if (Object.keys(commit).length === 0) return;
+
+  // link.href = commit.url;
+  // link.textContent = commit.id;
+
+  // authors.href = 'https://github.com/stephluooo';
+  // authors.textContent = commit.author;
+
+  // time.textContent = commit.time;
+
+  // lines.textContent = commit.lines.length;
+
+  // date.textContent = commit.datetime?.toLocaleString('en', {
+  //   dateStyle: 'full',
+  // });
+  if (!commit || Object.keys(commit).length === 0) {
+    link.href = '';
+    link.textContent = '';
+    date.textContent = '';
+    authors.textContent = '';
+    time.textContent = '';
+    lines.textContent = '';
+    return;
+  }
 
   link.href = commit.url;
   link.textContent = commit.id;
 
-  authors.href = 'https://github.com/stephluooo';
-  authors.textContent = commit.author;
+  authors.textContent = commit.author || '(unknown)';
 
-  time.textContent = commit.time;
+  // Show time as HH:MM
+  if (commit.datetime) {
+    time.textContent = commit.datetime.toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+    date.textContent = commit.datetime.toLocaleString('en', {
+      dateStyle: 'full',
+    });
+  } else {
+    time.textContent = '';
+    date.textContent = '';
+  }
 
-  lines.textContent = commit.lines.length;
-
-  date.textContent = commit.datetime?.toLocaleString('en', {
-    dateStyle: 'full',
-  });
+  // If you store total lines as a number
+  lines.textContent = commit.totalLines ?? 0;
 }
 
 function updateTooltipVisibility(isVisible) {
@@ -241,6 +282,7 @@ function updateTooltipVisibility(isVisible) {
 
 function updateTooltipPosition(event) {
   const tooltip = document.getElementById('commit-tooltip');
+  const offset = 10;
   tooltip.style.left = `${event.clientX}px`;
   tooltip.style.top = `${event.clientY}px`;
 }

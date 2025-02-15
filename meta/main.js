@@ -169,17 +169,18 @@ function createScatterplot() {
     .attr('r', 5)
     .attr('fill', 'steelblue')
     .style('fill-opacity', 0.7) // Add transparency for overlapping dots
-    .on('mouseenter', (event, commit) => {
-      d3.select(event.currentTarget).style('fill-opacity', 1); 
+    .on('mouseenter', function (event, commit) {
+      d3.select(event.currentTarget).style('fill-opacity', 1);
       updateTooltipContent(commit);
       updateTooltipVisibility(true);
       updateTooltipPosition(event);
     })
-    .on('mouseleave', () => {
+    .on('mousemove', updateTooltipPosition)
+    .on('mouseleave', function () {
       d3.select(event.currentTarget).style('fill-opacity', 0.7);
-      updateTooltipContent({}); // Clear tooltip content
+      updateTooltipContent({});
       updateTooltipVisibility(false);
-  });
+    });
 }
 
 

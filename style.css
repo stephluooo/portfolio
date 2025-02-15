@@ -255,14 +255,15 @@ path {
 
 .tooltip {
   position: fixed;
-  top: 1em;
-  left: 1em;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 8px;
+  background: rgba(255, 255, 255, 0.95); /* Semi-transparent white */
   border: 1px solid #ddd;
-  border-radius: 6px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 8px; /* Smoother corners */
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); /* More subtle shadow */
+  padding: 10px;
+  backdrop-filter: blur(5px); /* Frosted glass effect */
   opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
 }
 
 dl.info {

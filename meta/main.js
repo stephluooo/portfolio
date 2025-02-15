@@ -25,7 +25,7 @@ function processCommits() {
       let { author, date, time, timezone, datetime } = first;
       let ret = {
         id: commit,
-        url: 'https://github.com/Mingrui-Zhuang/portfolio/commit/' + commit,
+        url: 'https://github.com/stephluooo/portfolio/commit/' + commit,
         author,
         date,
         time,

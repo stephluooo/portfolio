@@ -90,21 +90,21 @@ document.addEventListener('DOMContentLoaded', async () => {
   createScatterplot();
 });
 
-const width = 1000;
-const height = 600;
-
-const svg = d3
-  .select('#chart')
-  .append('svg')
-  .attr('viewBox', `0 0 ${width} ${height}`)
-  .style('overflow', 'visible');
-
 function createScatterplot() {
+  const width = 1000;
+  const height = 600;
+
+  const svg = d3
+    .select('#chart')
+    .append('svg')
+    .attr('viewBox', `0 0 ${width} ${height}`)
+    .style('overflow', 'visible');
+
   const xScale = d3
-  .scaleTime()
-  .domain(d3.extent(commits, (d) => d.datetime))
-  .range([0, width])
-  .nice();
+    .scaleTime()
+    .domain(d3.extent(commits, (d) => d.datetime))
+    .range([0, width])
+    .nice();
 
   const yScale = d3.scaleLinear().domain([0, 24]).range([height, 0]);
 

@@ -224,11 +224,10 @@ path {
 .stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
-  /* gap: 15px;
+  gap: 15px;
   background: #f8f9fa;
   padding: 20px;
-  border-radius: 8px;
-  text-align: center; */
+  text-align: center;
   padding: 1rem;
   border: 2px solid var(--text-color);
   border-radius: 12px;
@@ -251,9 +250,9 @@ path {
   text-align: center;
 }
 
-.gridlines path {
+/* .gridlines path {
   stroke: none;
-}
+} */
 
 .gridlines line {
   stroke: lightgray;
@@ -274,7 +273,7 @@ circle:hover {
 dl.info {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 0.2rem;
+  gap: 4px 12px;
   transition-duration: 500ms;
   transition-property: opacity, visibility;
   opacity: 1;
@@ -286,17 +285,17 @@ dl.info[hidden]:not(:hover, :focus-within) {
 }
 
 dl.info dt {
-  font-weight: bold;
+  font-weight: normal;
   color: #555;
 }
 
 dl.info dd {
-  /* margin: 0; */
-  color: #222;
+  font-weight: bold;
+  margin: 0;
 }
 
 .tooltip {
-  position: fixed;
+  /* position: fixed;
   top: 1em;
   left: 1em;
   background: rgba(255, 255, 255, 0.9);
@@ -307,7 +306,16 @@ dl.info dd {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
   word-wrap: break-word;
   overflow-wrap: break-word;
-  /* opacity: 0; */
+  opacity: 0; */
+  position: fixed;
+  top: 1em;
+  left: 1em;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  opacity: 0;
 }
 
 

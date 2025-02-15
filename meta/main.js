@@ -111,9 +111,6 @@ function createScatterplot() {
 
   const yScale = d3.scaleLinear().domain([0, 24]).range([height, 0]);
 
-  const dots = svg.append('g').attr('class', 'dots');
-
-  
   const margin = { top: 20, right: 30, bottom: 50, left: 50 };
 
   const usableArea = {
@@ -154,14 +151,39 @@ function createScatterplot() {
     .attr('transform', `translate(${usableArea.left}, 0)`)
     .call(yAxis);
   
-  svg
-    .append('g')
-    .attr('class', 'dots')
+  const dots = svg.append('g').attr('class', 'dots');
+
+  dots
     .selectAll('circle')
     .data(commits)
     .join('circle')
     .attr('cx', (d) => xScale(d.datetime))
     .attr('cy', (d) => yScale(d.hourFrac))
     .attr('r', 5)
-    .attr('fill', 'steelblue');
+    .attr('fill', 'steelblue')
+    .on('mouseenter', (event, commit) => {
+      updateTooltipContent(commit);
+    })
+    .on('mouseleave', () => {
+      updateTooltipContent({}); 
+    });
+}
+
+function updateTooltipContent(commit) {
+  const link = document.getElementById('commit-link');
+  const date = document.getElementById('commit-date');
+  const time = document.getElementById('commit-time');
+  const author = document.getElementById('commit-author');
+  const lines = document.getElementById('commit-lines');
+
+  if (Object.keys(commit).length === 0) return;
+
+  link.href = commit.url;
+  link.textContent = commit.id;
+  date.textContent = commit.datetime?.toLocaleString('en', {
+      dateStyle: 'full',
+  });
+  time.textContent = commit.time;
+  author.textContent = commit.author;
+  lines.textContent = commit.totalLines;
 }

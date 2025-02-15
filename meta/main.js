@@ -93,8 +93,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 function createScatterplot() {
   const width = 1000;
   const height = 600;
-  // const sortedCommits = d3.sort(commits, (d) => -d.totalLines);
-  const sortedCommits = [...commits].sort((a, b) => b.totalLines - a.totalLines);
+  const sortedCommits = d3.sort(commits, (d) => -d.totalLines);
 
   const svg = d3
     .select('#chart')
@@ -141,7 +140,7 @@ function createScatterplot() {
   const rScale = d3
   .scaleSqrt() // Change only this line
   .domain([minLines, maxLines])
-  .range([3, 30]);
+  .range([2, 30]);
 
   // Create the axes
   const xAxis = d3.axisBottom(xScale);
@@ -159,29 +158,53 @@ function createScatterplot() {
     .attr('transform', `translate(${usableArea.left}, 0)`)
     .call(yAxis);
   
-  const dots = svg.append('g').attr('class', 'dots');
+    const dots = svg.append('g').attr('class', 'dots');
+    
+    dots
+      .selectAll('circle')
+      .data(sortedCommits)
+      .join('circle')
+      .attr('cx', (d) => xScale(d.datetime))
+      .attr('cy', (d) => yScale(d.hourFrac))
+      .attr('r', 5)
+      .attr('fill', 'steelblue');
 
+  // dots
+  //   .selectAll('circle')
+  //   .data(sortedCommits)
+  //   .join('circle')
+  //   .attr('cx', (d) => xScale(d.datetime))
+  //   .attr('cy', (d) => yScale(d.hourFrac))
+  //   .attr('r', (d) => rScale(d.totalLines))
+  //   // .attr('r', 5)
+  //   .attr('fill', 'steelblue')
+  //   .style('fill-opacity', 0.7) // Add transparency for overlapping dots
+  //   .on('mouseenter', function (event, commit) {
+  //     d3.select(event.currentTarget).style('fill-opacity', 1).attr('r', (d) => rScale(d.totalLines) * 1.2);
+  //     updateTooltipContent(commit);
+  //     updateTooltipVisibility(true);
+  //     updateTooltipPosition(event);
+  //   })
+  //   .on('mousemove', updateTooltipPosition)
+  //   .on('mouseleave', function () {
+  //     d3.select(event.currentTarget).style('fill-opacity', 0.7).attr('r', (d) => rScale(d.totalLines));
+  //     updateTooltipContent({});
+  //     updateTooltipVisibility(false);
+  //   });
   dots
     .selectAll('circle')
-    .data(sortedCommits)
-    .join('circle')
-    .attr('cx', (d) => xScale(d.datetime))
-    .attr('cy', (d) => yScale(d.hourFrac))
     .attr('r', (d) => rScale(d.totalLines))
-    // .attr('r', 5)
-    .attr('fill', 'steelblue')
-    .style('fill-opacity', 0.7) // Add transparency for overlapping dots
-    .on('mouseenter', function (event, commit) {
-      d3.select(event.currentTarget).style('fill-opacity', 1).attr('r', (d) => rScale(d.totalLines) * 1.2);
-      updateTooltipContent(commit);
-      updateTooltipVisibility(true);
-      updateTooltipPosition(event);
+    .style('fill-opacity', 0.7)
+    .on('mouseenter', (event, commit) => {
+        d3.select(event.currentTarget).style('fill-opacity', 1); 
+        updateTooltipContent(commit);
+        updateTooltipVisibility(true);
+        updateTooltipPosition(event);
     })
-    .on('mousemove', updateTooltipPosition)
-    .on('mouseleave', function () {
-      d3.select(event.currentTarget).style('fill-opacity', 0.7).attr('r', (d) => rScale(d.totalLines));
-      updateTooltipContent({});
-      updateTooltipVisibility(false);
+    .on('mouseleave', () => {
+        d3.select(event.currentTarget).style('fill-opacity', 0.7);
+        updateTooltipContent({}); // Clear tooltip content
+        updateTooltipVisibility(false);
     });
 }
 

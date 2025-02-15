@@ -94,7 +94,7 @@ function createScatterplot() {
   const width = 1000;
   const height = 600;
   const sortedCommits = d3.sort(commits, (d) => -d.totalLines);
-  const maxThreshold = 500; // Adjust this based on your data distribution
+  const maxThreshold = 30; // Adjust this based on your data distribution
   const filteredCommits = commits.filter(d => d.totalLines <= maxThreshold);
 
 

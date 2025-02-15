@@ -163,6 +163,7 @@ function createScatterplot() {
     .attr('cx', (d) => xScale(d.datetime))
     .attr('cy', (d) => yScale(d.hourFrac))
     .attr('r', (d) => rScale(d.totalLines))
+    .attr('fill', 'steelblue')
     .style('fill-opacity', 0.7) // Add transparency for overlapping dots
     .on('mouseenter', function (event, d) {
       d3.select(event.currentTarget).style('fill-opacity', 1); // Full opacity on hover

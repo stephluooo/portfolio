@@ -14,9 +14,8 @@
     {
         "title": "Bikewatching",
         "year": "2025",
-        "image": "../images/bikewatching.png",
-        "description": "A bike traffic visualization project for the city of Boston.",
-        "link": "https://stephluooo.github.io/bikewatching/"
+        "image": "https://github.com/stephluooo/portfolio/blob/main/images/bikewatching.png?raw=true",
+        "description": "A bike traffic visualization project. View here: <a href='https://stephluooo.github.io/bikewatching/' target='_blank'>Bikewatching</a>"
     },
     {
         "title": "Eius adipisci corporis maxime!",

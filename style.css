@@ -344,4 +344,25 @@ circle.selected {
   margin: 0;
 }
 
+.projects img {
+  max-width: 100%; /* Ensures image is responsive */
+  height: auto; /* Keeps aspect ratio */
+  display: block; /* Prevents inline spacing issues */
+  margin: 0 auto; /* Centers the image */
+  border-radius: 10px; /* Optional: adds rounded corners */
+}
+
+.projects .project {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers content */
+  text-align: center; /* Ensures text does not break */
+  width: 100%; /* Keeps the layout consistent */
+}
+
+.projects .project p {
+  max-width: 80%; /* Prevents text from stretching too much */
+  word-wrap: break-word; /* Ensures long text breaks properly */
+}
+
 

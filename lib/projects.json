@@ -12,10 +12,11 @@
         "year": "2024"
     },
     {
-        "title": "Sit saepe ea doloremque.",
-        "year": "2024",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Officiis in totam, quis nesciunt at recusandae suscipit modi ut repudiandae! Dolor autem saepe recusandae. Sapiente, aliquid laborum? Eaque culpa esse excepturi ullam laborum numquam et eveniet, sed explicabo at!"
+        "title": "Bikewatching",
+        "year": "2025",
+        "image": "../images/bikewatching.png",
+        "description": "A bike traffic visualization project for the city of Boston.",
+        "link": "https://stephluooo.github.io/bikewatching/"
     },
     {
         "title": "Eius adipisci corporis maxime!",

@@ -1,23 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meta</title>
-    <link rel="stylesheet" href="../style.css">
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script type="module" src="./main.js"></script>
-    <script type="module" src="../global.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Meta</title>
+
+  <link rel="stylesheet" href="../style.css" />
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script type="module" src="./main.js"></script>
+  <script type="module" src="../global.js"></script>
 </head>
-<body>
-
-
+    <body>
     <h1>Meta</h1>
-    <!-- <p>This page includes stats about the code of this website.</p> -->
 
+    <label for="commit_slider">Show commits until:</label>
+    <input
+        type="range"
+        id="commit_slider"
+        min="0"
+        max="100"
+        value="100"
+        style="margin: 0 10px;"
+    />
+    <time id="commit_time" style="margin-left: 1rem;"></time>
+
+    <!-- Summary stats -->
     <div id="stats"></div>
+
     <h2>Commits by time of day</h2>
-    <div id="chart"></div>
+    <div id="scrollytelling">
+        <div id="scroll-container">
+        <div id="spacer"></div>
+        <div id="items-container"></div>
+        </div>
+        <div id="chart"></div>
+    </div>
 
     <dl id="commit-tooltip" class="info tooltip" hidden>
         <dt>Commit</dt>
@@ -38,14 +55,21 @@
         <dd id="commit-lines"></dd>
     </dl>
 
-    <div id="stats"></div>
-    <div id="chart"></div>
+
+    <h2>File size visualization</h2>
+    <div id="files-scrolly">
+        <div id="scroll-container-file">
+        <div id="spacer-file"></div>
+        <div id="items-container-file"></div>
+        </div>
+
+
+        <section>
+        <dl class="files"></dl>
+        </section>
+    </div>
+
     <p id="selection-count">No commits selected</p>
     <dl id="language-breakdown" class="stats"></dl>
-
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script type="module" src="./main.js"></script>
-    <script type="module" src="../global.js"></script>
-
 </body>
 </html>

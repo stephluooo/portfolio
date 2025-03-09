@@ -1,22 +1,20 @@
+
 body {
-  /* Set line height to 1.5 times the font size
-        and use the OS’s UI font as the website font
-      */
   font: 100%/1.5 system-ui;
-  max-width: 100ch;
+  max-width: min(120ch, 80vw);
   margin-inline: max(1em, (100% - 100ch) / 2);
   padding: 1rem;
-  }
-
-/* img {
-  display: block;
-  margin: 1rem auto;
-  max-width: 100%;
-  height: auto;
-} */
+}
 
 section {
   margin-top: 2rem;
+}
+
+/* Navigation Styles */
+nav {
+  display: flex;
+  margin-bottom: 1em;
+  border-bottom: 1px solid var(--border-color);
 }
 
 nav ul {
@@ -24,14 +22,8 @@ nav ul {
   padding: 0;
   margin: 0;
   display: flex;
-  gap: 1rem; 
+  gap: 1rem;
   justify-content: center;
-}
-
-nav {
-  display: flex;
-  margin-bottom: 1em;
-  border-bottom: 1px solid var(--border-color);
 }
 
 nav a {
@@ -40,10 +32,9 @@ nav a {
   color: inherit;
   text-align: center;
   padding: 0.5em;
-
 }
 
-nav a:hover{
+nav a:hover {
   background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
   border-bottom: 0.4em solid var(--color-accent);
   padding-bottom: 0.3em;
@@ -54,6 +45,7 @@ nav a:hover{
   padding-bottom: 0.3em;
 }
 
+/* Root Variables and Global Settings */
 :root {
   --color-accent: oklch(0.93 0.04 310.41 / 1);
   color-scheme: light dark;
@@ -62,20 +54,20 @@ nav a:hover{
 
 form {
   font: inherit;
-  display:grid;
+  display: grid;
   grid-template-columns: auto 1fr;
   gap: 1em;
   width: 100%;
 }
 
-.section{
+.section {
   display: grid;
   grid-template-columns: subgrid;
   grid-column: 1 / -1;
   gap: 1em;
 }
 
-button{
+button {
   grid-column: 1 / -1;
 }
 
@@ -92,20 +84,20 @@ article {
   padding: 1em;
 }
 
-h2{
-  margin:0;
+h2 {
+  margin: 0;
 }
 
-h1{
+h1 {
   font-size: 400%;
 }
 
-h1, h2, h3, h4, h5, h6{
+h1, h2, h3, h4, h5, h6 {
   line-height: 1.1;
   text-wrap: balance;
 }
 
-.color-scheme{
+.color-scheme {
   position: absolute;
   top: 1rem;
   right: 1rem;
@@ -119,9 +111,12 @@ h1, h2, h3, h4, h5, h6{
   font-family: Arial, sans-serif;
 }
 
+/* ================================
+   Summary Stats (DL/DT/DD)
+================================ */
 dl {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Four equal columns */
+  grid-template-columns: repeat(6, 1fr); /* 6 columns for your summary stats */
   text-align: left;
 }
 
@@ -140,6 +135,7 @@ dd {
   text-align: left;
 }
 
+/* Additional Layout / Utility */
 .year {
   font-style: italic;
   font-size: 0.9em;
@@ -155,47 +151,49 @@ dd {
 
 .container {
   display: flex;
-  align-items: center; /* Align items vertically */
-  gap: 1rem; /* Add space between the pie chart and legend */
+  align-items: center;
+  gap: 1rem; /* Space between the pie chart and legend */
 }
 
-/* Legend container styling */
+/* ================================
+   Legend Container
+================================ */
 .legend {
   flex: 1;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
-  gap: 0.5rem; /* Adjust for spacing between items */
-  padding: 1rem; /* Padding around the legend box */
-  border: 1px solid #ccc; /* Optional border for the legend */
+  gap: 0.5rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
   border-radius: 0.5rem;
-  background-color: #f9f9f9; /* Optional background color */
+  background-color: #f9f9f9;
 }
 
-/* Individual legend items */
 .legend-item {
   display: flex;
-  align-items: center; /* Align swatch and text vertically */
-  gap: 0.5rem; /* Spacing between swatch and text */
+  align-items: center;
+  gap: 0.5rem;
 }
 
-/* Swatch styling */
 .swatch {
   width: 1em;
   height: 1em;
-  border-radius: 50%; /* Make the swatch circular */
-  background-color: var(--color); /* Set the swatch color dynamically */
-  display: inline-block; /* Ensure proper alignment */
+  border-radius: 50%;
+  background-color: var(--color);
+  display: inline-block;
 }
 
+/* Search bar styling (optional) */
 .searchBar {
-  width: 100%; /* Makes the input span the full width */
-  padding: 0.75em; /* Adds spacing for better UX */
-  font-size: 16px; /* Increases text size for readability */
-  border: 1px solid #ccc; /* Light border */
-  border-radius: 5px; /* Smooth rounded corners */
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle inner shadow */
+  width: 100%;
+  padding: 0.75em;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
+/* Path Hover Effects */
 &:has(path:hover) {
   path:not(:hover) {
     opacity: 0.5;
@@ -207,54 +205,47 @@ path {
   cursor: pointer;
 }
 
+/* ================================
+   Selection / Highlighting
+================================ */
 .selected {
-  --color: oklch(60% 45% 0) !important; /*highlight color*/
-
-  &:is(path) {
-    fill: var(--color);
-  }
+  --color: oklch(60% 45% 0) !important; /* highlight color */
 }
 
-/* Change the legend's swatch color when selected */
 .legend-selected .swatch {
-  --color: oklch(60% 45% 0) !important; /*highlight color*/
-  background-color: var(--color); /* Override background */
+  --color: oklch(60% 45% 0) !important;
+  background-color: var(--color);
 }
 
+/* ================================
+   Additional Stats (Responsive Grid)
+================================ */
 .stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   width: 100%;
   gap: 15px;
   background: #f8f9fa;
-  padding: 20px;
-  text-align: center;
   padding: 1rem;
+  text-align: center;
   border: 2px solid var(--text-color);
   border-radius: 12px;
 }
 
 .stats dt {
-  /* font-size: 0.85em;
-  color: #6c757d;
-  text-transform: uppercase; */
   text-align: center;
   padding: 0.5rem;
   border-radius: 8px;
 }
 
 .stats dd {
-  /* font-size: 1.5em;
-  font-weight: bold;
-  margin: 0; */
   margin-bottom: 0.6rem;
   text-align: center;
 }
 
-/* .gridlines path {
-  stroke: none;
-} */
-
+/* ================================
+   Scatter Plot Gridlines & Circles
+================================ */
 .gridlines line {
   stroke: lightgray;
   stroke-opacity: 0.7;
@@ -271,6 +262,9 @@ circle:hover {
   transform: scale(1.5);
 }
 
+/* ================================
+   Tooltip Info
+================================ */
 dl.info {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -307,7 +301,9 @@ dl.info[hidden]:not(:hover, :focus-within) {
   opacity: 0;
 }
 
-/* Brush Selection Styles */
+/* ================================
+   Brush Selection Styles
+================================ */
 @keyframes marching-ants {
   to {
     stroke-dashoffset: -8; /* 5 + 3 */
@@ -327,13 +323,15 @@ circle.selected {
   fill: #fa6262;
 }
 
-/* Language Breakdown Styles */
+/* ================================
+   Language Breakdown
+================================ */
 #language-breakdown {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
   padding-left: 2rem;
   padding-right: 2rem;
-  text-align: center; /* Center the text */
+  text-align: center;
 }
 
 #language-breakdown dt {
@@ -344,25 +342,231 @@ circle.selected {
   margin: 0;
 }
 
+/* ================================
+   Projects
+================================ */
 .projects img {
-  max-width: 100%; /* Ensures image is responsive */
-  height: auto; /* Keeps aspect ratio */
-  display: block; /* Prevents inline spacing issues */
-  margin: 0 auto; /* Centers the image */
-  border-radius: 10px; /* Optional: adds rounded corners */
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 10px;
 }
 
 .projects .project {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centers content */
-  text-align: center; /* Ensures text does not break */
-  width: 100%; /* Keeps the layout consistent */
+  align-items: center;
+  text-align: center;
+  width: 100%;
 }
 
 .projects .project p {
-  max-width: 80%; /* Prevents text from stretching too much */
-  word-wrap: break-word; /* Ensures long text breaks properly */
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+/* ================================
+   File Visualization
+================================ */
+/* Instead of subgrid, use a simple two-column approach for dt & dd */
+.files {
+  display: grid;
+  gap: 1em;
+  /* If you want the dt, dd side by side, do grid-template-columns: auto 1fr */
+}
+
+.files > div {
+  display: grid;
+  grid-template-columns: auto 1fr; /* dt in column 1, dd in column 2 */
+  gap: 0.5em; /* spacing between columns */
+  border: 1px solid #eee;
+  border-radius: 4px;
+  padding: 1em;
+  background: #fefefe;
+}
+
+.files dt {
+  grid-column: 1;
+  font-weight: bold;
+}
+
+.files dd {
+  grid-column: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  align-content: start;
+  gap: 0.15em;
+  margin: 0; /* remove default margin */
+}
+
+/* Each dot representing a line of code */
+.line {
+  display: flex;
+  width: 0.5em;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: steelblue; /* or set inline with JS */
+}
+
+/* ================================
+   Commits Scrollytelling Layout
+================================ */
+#scrollytelling {
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border: 1px solid #ddd; 
+  border-radius: 6px; 
+  background-color: #fefefe;
+  padding: 1em; 
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+#scroll-container {
+  position: relative;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 0.5em;
+  height: 350px;
+  overflow-y: scroll;
+
+}
+
+#chart {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  padding: 1em; /* space around the chart's SVG */
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+#spacer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: none;
+  pointer-events: none;
+}
+
+#items-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 
+.commit-item {
+  margin-bottom: 0.75em; 
+  border: 1px solid #eee;
+  border-radius: 6px;
+  background-color: #fafafa;
+  padding: 1em;
+
+}
+
+/* Tweak text inside each commit item */
+.commit-item p {
+  margin: 0.5em 0;
+  line-height: 1.4;
+}
+
+/* Commit links style */
+.commit-item a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.commit-item a:hover {
+  text-decoration: underline;
+}
+
+/* ================================
+   Files Scrollytelling (Optional)
+================================ */
+#scrollytelling-file {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  margin-bottom: 2rem; /* Optional spacing */
+}
+
+#scroll-container-file {
+  position: relative;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 0.5em;
+  height: 350px;
+  overflow-y: scroll;  /* keep vertical scrolling if needed */
+  margin-bottom: 50px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+
+}
+
+#spacer-file {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: none;
+  pointer-events: none;
+}
+
+#items-container-file {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.commit-item-file {
+  margin-bottom: 0.75em;        /* space between items */
+  border: 1px solid #eee;
+  border-radius: 6px;
+  background-color: #fafafa;
+  padding: 1em;
+  position: absolute;           /* needed for absolute offsets from JS */
+  width: 100%;
+  box-sizing: border-box;
+  overflow-wrap: break-word;    /* allow multi-line text wrapping */
+
+  height: 70px;            /* matches ITEM_HEIGHT_FILE */
+  overflow: auto;        /* hide anything that doesn't fit */
+  white-space: nowrap;     /* single line only */
+}
+
+.commit-item-file p {
+  margin: 0;
+  line-height: 1.4;  
+  white-space: nowrap;
+  overflow: auto;
+}
+
+/* Dot styling in file-visualization */
+.file-visualization .line-dot {
+  width: 0.5em;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: inline-flex;
+  margin: 1px; /* small spacing if desired */
+}
+
+/* Side-by-side layout for file scrolly and file visualization */
+#files-scrolly {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* left col = scroller, right col = files */
+  gap: 1rem;
+  margin-bottom: 2rem; /* optional spacing */
+}
+
+#files-scrolly section {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  overflow: auto; /* if needed for large content */
+}
